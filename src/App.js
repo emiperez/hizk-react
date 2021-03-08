@@ -1,5 +1,7 @@
 import React from "react";
 import LevelSelect from "./LevelSelect";
+import Term from "./Term";
+import Translation from "./Translation";
 import "./style.css";
 
 class Filter extends React.Component {
@@ -17,29 +19,63 @@ class Filter extends React.Component {
 	}
 
 	handleLevelChange() {
-		this.setState({	maxQuestions: state.maxQuestions + 1});
+		console.log(
+			this.setState({
+				maxQuestions: this.state.maxQuestions + 1
+			}));
 	}
 
 	handleChangeQuestionAmount() {
-		this.setState(state => ({
-			questionAmount: e.target.value
-		}));
+		this.setState({
+			questionAmount: this.state.questionAmount + 1
+		});
 	}
 
 	render() {
 		return (
 			<>
-				<LevelSelect
-					onChange={this.handleLevelChange}
-					value={this.state.level}
-				/>
-				<input
-					id="questionAmount"
-					type="range"
-					max={this.state.maxQuestions}
-					onChange={this.handleChangeQuestionAmount}
-				/>
-				<span id="questionAmount">{this.state.questionAmount}</span>
+				<p>
+					<LevelSelect
+						onChange={this.handleLevelChange}
+						value={this.state.level}
+					/>
+				</p>
+
+				<p>
+					<input
+						id="questionAmount"
+						type="range"
+						max={this.state.maxQuestions}
+						onChange={this.handleChangeQuestionAmount}
+					/>
+					<span id="questionAmount">{this.state.questionAmount}</span>
+				</p>
+
+				<p>
+					<Term locale="es" mode="label" value="Hello World" />
+				</p>
+
+				<p>
+					<Term locale="dn" mode="search" value="Hello World" />
+				</p>
+
+				<p>
+					<Translation
+						origin="Origin"
+						originLocale="en"
+						target="Traducción"
+						targetLocale="es"
+						mode="new" />
+				</p>
+
+				<p>
+					<Translation
+						origin="Origin"
+						originLocale="en"
+						target="Traducción"
+						targetLocale="es"
+						mode="exam"	/>
+				</p>
 			</>
 		);
 	}

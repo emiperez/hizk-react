@@ -1,3 +1,17 @@
+body {
+	background-color: #111111;
+	color: #eeeeee;
+}
+
 h1, p {
-  font-family: Lato;
+	font-family: Lato;
+}
+
+.translationTerm {
+	display: inline-block;
+	width: 20em;
+}
+
+.translationTerm input {
+	width: 19em;
 }
