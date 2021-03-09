@@ -74,7 +74,17 @@ class Filter extends React.Component {
 						originLocale="en"
 						target="Traducción"
 						targetLocale="es"
-						mode="exam"	/>
+						mode="edit"
+					/>
+				</p>
+
+				<p>
+					<Translation
+						origin="Origin"
+						originLocale="en"
+						target="Traducción"
+						targetLocale="es"
+						mode="exam" />
 				</p>
 			</>
 		);

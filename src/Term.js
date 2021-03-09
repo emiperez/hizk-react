@@ -19,9 +19,9 @@ export default class Term extends React.Component {
 				return (
 					<input className="searchTerm" type="text" value={this.props.value} />
 				);
-			case "edit":
+			case "guess":
 				return (
-					<input className="editTerm" type="text" value={this.props.value} />
+					<input className="guessTerm" type="text" value={this.props.value} />
 				);
 		}
 	}
@@ -29,5 +29,5 @@ export default class Term extends React.Component {
 
 Term.PropTypes = {
 	locale: PropTypes.oneOf(locales),
-	mode: PropTypes.oneOf(["label", "search", "edit"])
+	mode: PropTypes.oneOf(["label", "search", "guess"])
 };
