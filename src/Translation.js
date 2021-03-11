@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import Term from "./Term";
 import locales from "./locales.json";
 
@@ -60,8 +60,8 @@ export default class Translation extends React.Component {
 	}
 }
 
-Translation.PropTypes = {
-	originLocale: PropTypes.oneOf(locales),
-	targetLocale: PropTypes.oneOf(locales),
-	mode: PropTypes.oneOf(["new", "edit", "exam"])
+Translation.propTypes = {
+	originLocale: propTypes.oneOf(locales),
+	targetLocale: propTypes.oneOf(locales),
+	mode: propTypes.oneOf(["new", "edit", "exam"])
 };

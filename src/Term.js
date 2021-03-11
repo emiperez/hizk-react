@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import locales from "./locales.json";
 
 export default class Term extends React.Component {
@@ -16,18 +16,14 @@ export default class Term extends React.Component {
 			case "label":
 				return <label>{this.props.value}</label>;
 			case "search":
-				return (
-					<input className="searchTerm" type="text" value={this.props.value} />
-				);
+				return <input className="searchTerm" type="text" />;
 			case "guess":
-				return (
-					<input className="guessTerm" type="text" value={this.props.value} />
-				);
+				return <input className="guessTerm" type="text" />;
 		}
 	}
 }
 
-Term.PropTypes = {
-	locale: PropTypes.oneOf(locales),
-	mode: PropTypes.oneOf(["label", "search", "guess"])
+Term.propTypes = {
+	locale: propTypes.oneOf(locales),
+	mode: propTypes.oneOf(["label", "search", "guess"])
 };
