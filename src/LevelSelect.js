@@ -17,9 +17,6 @@ export default class LevelSelect extends React.Component {
 
 	render() {
 		console.log("LevelSelect render");
-		fetch(config.apiUrl + "/translations/levels")
-			.then(response => response.json())
-			.then(data => (this.state.levels = data));
 		const levelOptions = this.state.levels.map(level => (
 			<option key={level}>{level}</option>
 		));
