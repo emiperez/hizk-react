@@ -1,5 +1,6 @@
 import React from "react";
 import LevelSelect from "./LevelSelect";
+import LocaleSelect from "./LocaleSelect";
 import RangeWithLabel from "./RangeWithLabel";
 import config from "./config.json";
 
@@ -17,16 +18,27 @@ export default class Filter extends React.Component {
 		};
 
 		this.handleLevelChange = this.handleLevelChange.bind(this);
+		this.handleOriginLocaleChange = this.handleOriginLocaleChange.bind(this);	
+		this.handleTargetLocaleChange = this.handleTargetLocaleChange.bind(this);		
 		this.handleChangeQuestionAmount = this.handleChangeQuestionAmount.bind(this);
 		this.handleLatestChange = this.handleLatestChange.bind(this);
 	}
 
 	handleLevelChange(e) {
-		fetch(config.apiUrl + "/translations/count/es/de/" + e.target.value)
-			.then(response => response.text())
-			.then(data => this.setState({ maxQuestions: parseInt(data) }));
+		console.log("QuestionFilter Level Changed: " + e.target.value);
+		this.updateMaxQuestionsAfterUpdatingState({level: e.target.value});
 	}
 
+	handleOriginLocaleChange(e) {
+		console.log("QuestionFilter OriginLocale Changed: " + e.target.value);
+		this.updateMaxQuestionsAfterUpdatingState({originLocale: e.target.value});
+	}
+
+	handleTargetLocaleChange(e) {
+		console.log("QuestionFilter TargetLocale Changed: " + e.target.value);
+		this.updateMaxQuestionsAfterUpdatingState({targetLocale: e.target.value});
+	}
+	
 	handleChangeQuestionAmount(e) {
 		this.setState({
 			questionAmount: e.target.value
@@ -38,18 +50,28 @@ export default class Filter extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch(config.apiUrl + "/translations/count/es/de/" + this.state.level)
+		this.updateMaxQuestions();
+	}
+	
+	updateMaxQuestionsAfterUpdatingState(newState) {
+		this.setState(newState, function() {this.updateMaxQuestions();});		
+	}
+	
+	updateMaxQuestions() {
+		fetch(config.apiUrl + "/translations/count/" + this.state.originLocale + "/" + this.state.targetLocale + "/" + this.state.level)
 			.then(response => parseInt(response.text()))
-			.then(data => this.setState({ maxQuestions: data }));
+			.then(data => this.setState({ maxQuestions: data }));		
 	}
 
 	render() {
 		return (
 			<div id="questionFilter">
 
-				<LevelSelect
+				<LevelSelect id="questionFilterLevelSelect"
 					onChange={this.handleLevelChange}
-					value={this.state.level} />
+					defaultValue={this.state.level} />
+				<LocaleSelect id="originLocale" defaultValue={this.state.originLocale} onChange={this.handleOriginLocaleChange} />
+				<LocaleSelect id="targetLocale" defaultValue={this.state.targetLocale} onChange={this.handleTargetLocaleChange} />
 				<RangeWithLabel
 					id="questionAmount"
 					min="5"

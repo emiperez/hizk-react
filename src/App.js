@@ -12,11 +12,12 @@ export default class App extends React.Component {
 		return (
 			<>
 				<div>
-					<QuestionFilter level="A1" questionAmount="5" latest={100} />
-				</div>
-
-				<div>
-					<Term locale="es" mode="label" value="Hello World" />
+					<QuestionFilter 
+						level="B1" 
+						originLocale="es"
+						targetLocale="de"
+						questionAmount="5" 
+						latest={100} />
 				</div>
 
 				<div>
@@ -30,25 +31,6 @@ export default class App extends React.Component {
 						target="Traducción"
 						targetLocale="es"
 						mode="new"
-					/>
-				</div>
-
-				<div>
-					<Translation
-						origin="Origin"
-						originLocale="de"
-						target="Traducción"
-						targetLocale="es"
-						mode="edit"
-					/>
-				</div>
-				<div>
-					<Translation
-						origin="Origin"
-						originLocale="de"
-						target="Traducción"
-						targetLocale="es"
-						mode="exam"
 					/>
 				</div>
 			</>

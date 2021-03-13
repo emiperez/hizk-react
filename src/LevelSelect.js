@@ -1,7 +1,7 @@
 import React from "react";
 import config from "./config.json";
 
-export default class LevelSelect extends React.Component {
+export default class LocaleSelect extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -21,7 +21,7 @@ export default class LevelSelect extends React.Component {
 		));
 		return (
 			<div>
-				<select id="level" onChange={this.props.onChange}>
+				<select id="level" value={this.props.defaultValue} onChange={this.props.onChange}>
 					{levelOptions}
 				</select>
 			</div>
