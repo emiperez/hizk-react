@@ -1,5 +1,5 @@
 import React from "react";
-import Filter from "./Filter";
+import QuestionFilter from "./QuestionFilter";
 import Term from "./Term";
 import Translation from "./Translation";
 import "./style.css";
@@ -12,7 +12,7 @@ export default class App extends React.Component {
 		return (
 			<>
 				<div>
-					<Filter level="A1" questionAmount="5" />
+					<QuestionFilter level="A1" questionAmount="5" latest={100} />
 				</div>
 
 				<div>

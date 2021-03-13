@@ -16,14 +16,15 @@ export default class LevelSelect extends React.Component {
 	}
 
 	render() {
-		console.log("LevelSelect render");
 		const levelOptions = this.state.levels.map(level => (
 			<option key={level}>{level}</option>
 		));
 		return (
-			<select id="level" onChange={this.props.onChange}>
-				{levelOptions}
-			</select>
+			<div>
+				<select id="level" onChange={this.props.onChange}>
+					{levelOptions}
+				</select>
+			</div>
 		);
 	}
 }
