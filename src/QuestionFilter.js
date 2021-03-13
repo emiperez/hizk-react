@@ -22,6 +22,7 @@ export default class Filter extends React.Component {
 		this.handleTargetLocaleChange = this.handleTargetLocaleChange.bind(this);		
 		this.handleChangeQuestionAmount = this.handleChangeQuestionAmount.bind(this);
 		this.handleLatestChange = this.handleLatestChange.bind(this);
+		this.handleStartExamClick = this.handleStartExamClick.bind(this);
 	}
 
 	handleLevelChange(e) {
@@ -48,6 +49,10 @@ export default class Filter extends React.Component {
 	handleLatestChange(e) {
 		this.setState({ latest: e.target.value });
 	}
+	
+	handleStartExamClick() {
+		this.props.onStartExam(this.state);
+	}
 
 	componentDidMount() {
 		this.updateMaxQuestions();
@@ -65,6 +70,7 @@ export default class Filter extends React.Component {
 
 	render() {
 		return (
+			<>
 			<div id="questionFilter">
 
 				<LevelSelect id="questionFilterLevelSelect"
@@ -84,7 +90,11 @@ export default class Filter extends React.Component {
 					max={this.state.maxQuestions}
 					value={this.state.latest}
 					onChange={this.handleLatestChange} />
+				<button onClick={this.handleStartExamClick}>Start Exam</button>
 			</div>
+			<div id="exam">
+			</div>
+			</>
 		);
 	}
 }

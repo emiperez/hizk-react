@@ -7,6 +7,11 @@ import "./style.css";
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
+		this.handleStartExam = this.handleStartExam.bind(this);
+	}
+	
+	handleStartExam(questionFilter) {
+		alert("exam Started: " + JSON.stringify(questionFilter));
 	}
 	render() {
 		return (
@@ -17,7 +22,8 @@ export default class App extends React.Component {
 						originLocale="es"
 						targetLocale="de"
 						questionAmount="5" 
-						latest={100} />
+						latest={100}
+						onStartExam={this.handleStartExam} />
 				</div>
 
 				<div>
