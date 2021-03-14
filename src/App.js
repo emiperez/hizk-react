@@ -10,8 +10,8 @@ export default class App extends React.Component {
 		this.handleStartExam = this.handleStartExam.bind(this);
 	}
 	
-	handleStartExam(questionFilter) {
-		alert("exam Started: " + JSON.stringify(questionFilter));
+	handleStartExam(exam) {
+		this.setState({exam: exam});
 	}
 	render() {
 		return (
@@ -19,11 +19,26 @@ export default class App extends React.Component {
 				<div>
 					<QuestionFilter 
 						level="B1" 
-						originLocale="es"
-						targetLocale="de"
-						questionAmount="5" 
+						questionLocale="es"
+						answerLocale="de"
+						caseSensitive={true}
+						questionAmount="15"
+						maxQuestions="15"
 						latest={100}
 						onStartExam={this.handleStartExam} />
+				</div>
+				
+				<div>
+				{this.state && this.state.exam.questions.map(question => (
+					<div key={question.id}>
+					<Translation 
+						origin={question.text}
+						originLocale={question.locale}
+						target=""
+						targetLocale={this.state.exam.answerLocale}
+						mode="exam" />
+					</div>
+				))}
 				</div>
 
 				<div>
