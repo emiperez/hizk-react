@@ -20,7 +20,9 @@ export default class LocaleSelect extends React.Component {
 			<option key={locale} >{locale}</option>
 		));
 		return (
-				<select id={this.props.id} value={this.props.defaultValue} onChange={this.props.onChange}>
+				<select id={this.props.id} 
+					value={this.props.value || this.props.defaultValue} 
+					onChange={this.props.onChange}>
 					{localeOptions}
 				</select>
 		);

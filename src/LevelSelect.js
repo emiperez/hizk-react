@@ -21,7 +21,9 @@ export default class LocaleSelect extends React.Component {
 		));
 		return (
 			<div>
-				<select id="level" value={this.props.defaultValue} onChange={this.props.onChange}>
+				<select 
+					value={this.props.value || this.props.defaultValue || "A1"}
+					onChange={this.props.onChange}>
 					{levelOptions}
 				</select>
 			</div>

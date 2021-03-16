@@ -3,13 +3,7 @@ import React from "react";
 export default class RangeWithLabel extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { value: props.defaultValue };
-		this.handleChange = this.handleChange.bind(this);
-	}
-	
-	handleChange(e) {
-		this.setState({value: e.target.value});
-		this.props.onChange(e);
+		this.state = { value: props.value || props.defaultValue };
 	}
 
 	render() {
@@ -19,8 +13,8 @@ export default class RangeWithLabel extends React.Component {
 					type="range"
 					min={this.props.min}
 					max={this.props.max}
-					onChange={this.handleChange}
-					defaultValue={this.state.value} />
+					onChange={e => this.setState({ value: e.target.value })}
+					value={this.state.value} />
 				<span>{this.state.value}</span>
 			</span>
 		);
