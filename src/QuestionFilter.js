@@ -13,9 +13,9 @@ export default class QuestionFilter extends React.Component {
 			questionLocale: this.props.questionLocale || "es",
 			answerLocale: this.props.answerLocale || "de",
 			caseSensitive: this.props.caseSensitive || true,
-			maxQuestions: parseInt(this.props.maxQuestions || 100),
-			latest: parseInt(this.props.latest || 100),
-			questionAmount: parseInt(this.props.questionAmount || 10)
+			maxQuestions: this.props.maxQuestions || 100,
+			latest: Math.ceil((this.props.latest || 100)/5)*5,
+			questionAmount: this.props.questionAmount || 10
 		};
 		this.handleStartExamClick = this.handleStartExamClick.bind(this);
 	}
@@ -51,10 +51,7 @@ export default class QuestionFilter extends React.Component {
 	updateMaxQuestions() {
 		fetch(config.apiUrl + "/translations/count/" + this.state.questionLocale + "/" + this.state.answerLocale + "/" + this.state.level)
 			.then(response => response.text())
-			.then(data => {
-				console.log("data: " + data);
-				this.setState({ maxQuestions: parseInt(data) });
-			});
+			.then(data => this.setState({ maxQuestions: Math.ceil(parseInt(data)/5) * 5 }));
 	}
 
 	render() {
@@ -63,18 +60,21 @@ export default class QuestionFilter extends React.Component {
 				<div id="questionFilter">
 					<div className="filterField">
 						<label>Level</label>
-						<LevelSelect onChange={e => this.updateMaxQuestionsAfterUpdatingState({ level: e.target.value })}
-							value={this.state.level} />
+						<LevelSelect
+							value={this.state.level}
+							onChange={e => this.updateMaxQuestionsAfterUpdatingState({ level: e.target.value })} />
 					</div>
 					<div className="filterField">
 						<label>Question Locale</label>
-						<LocaleSelect onChange={e => this.updateMaxQuestionsAfterUpdatingState({ questionLocale: e.target.value })}
-							value={this.state.questionLocale} />
+						<LocaleSelect
+							value={this.state.questionLocale} 
+							onChange={e => this.updateMaxQuestionsAfterUpdatingState({ questionLocale: e.target.value })} />
 					</div>
 					<div className="filterField">
 						<label>Answer Locale</label>
-						<LocaleSelect onChange={e => this.updateMaxQuestionsAfterUpdatingState({ answerLocale: e.target.value })}
-							value={this.state.answerLocale} />
+						<LocaleSelect
+							value={this.state.answerLocale} 
+							onChange={e => this.updateMaxQuestionsAfterUpdatingState({ answerLocale: e.target.value })} />
 					</div>
 					<div className="filterField">
 						<label>Case Sensitive</label>
@@ -86,8 +86,9 @@ export default class QuestionFilter extends React.Component {
 							id="questionAmount"
 							min={5}
 							max={20}
-							onChange={e => this.setState({ questionAmount: e.target.value })}
-							value={this.state.questionAmount} />
+							step={5}
+							value={this.state.questionAmount}
+							onChange={e => this.setState({ questionAmount: e.target.value })} />
 					</div>
 					<div className="filterField">
 						<label>Latest</label>
@@ -95,9 +96,10 @@ export default class QuestionFilter extends React.Component {
 							id="latest"
 							min={this.state.questionAmount}
 							max={this.state.maxQuestions}
+							step={5}
 							value={this.state.latest}
 							onChange={e => this.setState({ latest: e.target.value })} />
-					</div>					
+					</div>			
 					<button onClick={this.handleStartExamClick}>Start Exam</button>
 				</div>
 			</>

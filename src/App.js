@@ -1,6 +1,5 @@
 import React from "react";
 import QuestionFilter from "./QuestionFilter";
-import Term from "./Term";
 import Translation from "./Translation";
 import "./style.css";
 
@@ -14,6 +13,10 @@ export default class App extends React.Component {
 		this.setState({exam: exam});
 	}
 	
+	handleGradeExam() {
+		alert('Exam graded');
+	}
+	
 	render() {
 		return (
 			<>
@@ -23,14 +26,14 @@ export default class App extends React.Component {
 						questionLocale="es"
 						answerLocale="de"
 						caseSensitive={true}
-						questionAmount="15"
-						maxQuestions="15"
+						questionAmount={15}
+						maxQuestions={15}
 						latest={100}
 						onStartExam={this.handleStartExam} />
 				</div>
-				
-				<div>
-				{this.state && this.state.exam.questions.map(question => (
+				{this.state &&
+				<div> 
+					{this.state.exam.questions.map(question => (
 					<div key={question.id}>
 					<Translation 
 						origin={question.text}
@@ -40,7 +43,11 @@ export default class App extends React.Component {
 						mode="exam" />
 					</div>
 				))}
+				<div>
+					<button onClick={this.handleGradeExam}>Grade Exam</button>
 				</div>
+				</div>
+				}
 			</>
 		);
 	}
