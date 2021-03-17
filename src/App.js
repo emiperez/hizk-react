@@ -13,6 +13,7 @@ export default class App extends React.Component {
 	handleStartExam(exam) {
 		this.setState({exam: exam});
 	}
+	
 	render() {
 		return (
 			<>
@@ -39,20 +40,6 @@ export default class App extends React.Component {
 						mode="exam" />
 					</div>
 				))}
-				</div>
-
-				<div>
-					<Term locale="de" mode="search" value="Hello World" />
-				</div>
-
-				<div>
-					<Translation
-						origin="Origin"
-						originLocale="de"
-						target="Traducción"
-						targetLocale="es"
-						mode="new"
-					/>
 				</div>
 			</>
 		);

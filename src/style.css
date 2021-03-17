@@ -15,3 +15,18 @@ h1, p {
 .translationTerm input {
 	width: 19em;
 }
+
+.filterField {
+	display: inline-block;
+	padding: 0.3em;
+	margin: 0.2em;
+	border: thin solid gray;
+}
+
+.filterField label {
+	padding-right: 0.2em;
+}
+
+.filterField label::after {
+	content: ":";
+}
