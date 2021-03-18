@@ -11,14 +11,15 @@ export default class Term extends React.Component {
 			mode: this.props.mode
 		};
 	}
+	
 	render() {
 		switch (this.props.mode) {
 			case "label":
 				return <label>{this.props.value}</label>;
 			case "search":
-				return <input className="searchTerm" type="text" />;
+				return <input className="searchTerm" type="text" onChange={this.props.onChange}/>;
 			case "guess":
-				return <input className="guessTerm" type="text" />;
+				return <input className="guessTerm" type="text" onBlur={this.props.onChange} />;
 		}
 	}
 }

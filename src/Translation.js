@@ -8,6 +8,7 @@ export default class Translation extends React.Component {
 		super(props);
 
 		this.state = {
+			id: this.props.id,
 			origin: this.props.origin,
 			originLocale: this.props.originLocale,
 			target: this.props.target,
@@ -44,9 +45,11 @@ export default class Translation extends React.Component {
 				</span>
 				<span className="translationTerm">
 					<Term
+						translation={targetMode == "guess" && this.props.id}
 						mode={targetMode}
 						locale={this.state.targetLocale}
 						value={this.state.target}
+						onChange={this.props.onChange}
 					/>
 				</span>
 				{this.state.mode === "edit" && (

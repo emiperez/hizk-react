@@ -9,14 +9,12 @@ export default class RangeWithLabel extends React.Component {
 
 	static getDerivedStateFromProps(props, state) {
 		if (parseInt(props.min) > state.value) {
-		console.log("min Props: " + JSON.stringify(props) + "/" + state.value);
 			return { value: props.min };
 		}
 		if (parseInt(props.max) < state.value) {
-		console.log("Max Props: " + JSON.stringify(props));
 			return { value: props.max };
 		}
-		return null
+		return null;
 	}
 	
 	handleChange(e) {
