@@ -1,7 +1,7 @@
 import React from "react";
 import config from "./config.json";
 
-export default class LocaleSelect extends React.Component {
+export default class LevelSelect extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
