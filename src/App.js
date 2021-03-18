@@ -6,14 +6,12 @@ import "./style.css";
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
+		this.answers = new Map();
 		this.state = {exam: null}
 		
 		this.handleStartExam = this.handleStartExam.bind(this);
-	}	
-
-	static getDerivedStateFromProps(props, state) {
-		console.log("App Props: " + JSON.stringify(props) + "/" + state.value);
-		return null;
+		this.handleChangeTranslation = this.handleChangeTranslation.bind(this);
+		this.handleGradeExam = this.handleGradeExam.bind(this);
 	}
 	
 	handleStartExam(exam) {
@@ -22,10 +20,11 @@ export default class App extends React.Component {
 	
 	handleChangeTranslation(e, questionId) {
 		console.log("changed: " + e.target.value + "/" + questionId);
+		this.answers.set(questionId, e.target.value);
 	}
 	
 	handleGradeExam() {
-		this.exam
+		console.log(JSON.stringify(this.state.exam));
 	}
 	
 	render() {
