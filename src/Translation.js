@@ -48,7 +48,7 @@ export default class Translation extends React.Component {
 						translation={targetMode == "guess" && this.props.id}
 						mode={targetMode}
 						locale={this.state.targetLocale}
-						value={this.state.target}
+						value={this.props.target}
 						onChange={this.props.onChange}
 					/>
 				</span>
