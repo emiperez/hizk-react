@@ -6,25 +6,16 @@ import locales from "./locales.json";
 export default class Translation extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			id: this.props.id,
-			origin: this.props.origin,
-			originLocale: this.props.originLocale,
-			target: this.props.target,
-			targetLocale: this.props.targetLocale,
-			mode: this.props.mode
-		};
 		this.handleSaveTranslation = this.handleSaveTranslation.bind(this);
 		this.handleDeleteTranslation = this.handleDeleteTranslation.bind(this);
 	}
 
 	handleSaveTranslation() {
-		alert("Save: " + this.state.origin + " / " + this.state.target);
+		alert("Save: " + this.props.origin + " / " + this.props.target);
 	}
 
 	handleDeleteTranslation() {
-		alert("Delete: " + this.state.origin + " / " + this.state.target);
+		alert("Delete: " + this.props.origin + " / " + this.props.target);
 	}
 
 	render() {
@@ -39,20 +30,19 @@ export default class Translation extends React.Component {
 				<span className="translationTerm">
 					<Term
 						mode={originMode}
-						locale={this.state.originLocale}
-						value={this.state.origin}
+						locale={this.props.originLocale}
+						value={this.props.origin}
 					/>
 				</span>
 				<span className="translationTerm">
 					<Term
-						translation={targetMode == "guess" && this.props.id}
 						mode={targetMode}
-						locale={this.state.targetLocale}
+						locale={this.props.targetLocale}
 						value={this.props.target}
 						onChange={this.props.onChange}
 					/>
 				</span>
-				{this.state.mode === "edit" && (
+				{this.props.mode === "edit" && (
 					<span className="translationEditButtons">
 						<button onClick={this.handleSaveTranslation}>Save</button>
 						<button onClick={this.handleDeleteTranslation}>Delete</button>
