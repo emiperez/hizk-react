@@ -16,7 +16,7 @@ export default class App extends React.Component {
 	}
 
 	handleStartExam(exam) {
-		this.answers = new Map();
+		this.answers = new Map(exam.questions.map(q => [q.id, {id: q.id, locale: exam.answerLocale, text: ""}]));
 		this.setState({ exam: exam, corrections: null }, this.resetAnswerInputs());
 	}
 
