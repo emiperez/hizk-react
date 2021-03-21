@@ -18,8 +18,7 @@ export default class RangeWithLabel extends React.Component {
 	}
 	
 	handleChange(e) {
-		this.setState({ value: e.target.value });
-		this.props.onChange(e);
+		this.setState({ value: e.target.value }, this.props.onChange(e));
 	}
 
 	render() {

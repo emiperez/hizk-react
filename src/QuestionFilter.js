@@ -13,7 +13,7 @@ export default class QuestionFilter extends React.Component {
 			questionLocale: this.props.questionLocale || "es",
 			answerLocale: this.props.answerLocale || "de",
 			caseSensitive: this.props.caseSensitive || true,
-			maxQuestions: this.props.maxQuestions || 100,
+			maxQuestions: this.props.maxQuestions || 20,
 			latest: Math.ceil((this.props.latest || 100)/5)*5,
 			questionAmount: this.props.questionAmount || 10
 		};
