@@ -31,3 +31,13 @@ h1, p {
 .filterField label::after {
 	content: ":";
 }
+
+.rightAnswer {
+	color: green;
+}
+
+.wrongAnswer {
+	color:red;
+	font-weight: bold;
+	display: inline-block;
+}
