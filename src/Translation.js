@@ -19,10 +19,9 @@ export default class Translation extends React.Component {
 	}
 
 	render() {
-		let originMode = "search";
-		let targetMode = "search";
+		let originMode = "label";
+		let targetMode = "label";
 		if (this.props.mode === "exam") {
-			originMode = "label";
 			targetMode = "guess";
 		}
 		return (
@@ -56,5 +55,5 @@ export default class Translation extends React.Component {
 Translation.propTypes = {
 	originLocale: propTypes.oneOf(locales),
 	targetLocale: propTypes.oneOf(locales),
-	mode: propTypes.oneOf(["new", "edit", "exam"])
+	mode: propTypes.oneOf(["new", "print", "edit", "exam"])
 };

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Exam from "./Exam";
+import Record from "./Record";
 import "./style.css";
 
 export default function App() {
@@ -37,9 +38,5 @@ export default function App() {
       </div>
     </Router>
   );
-}
-
-function Record() {
-  return <h2>Record</h2>;
 }
 
