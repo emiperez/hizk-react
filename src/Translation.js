@@ -41,9 +41,9 @@ export default class Translation extends React.Component {
 						onChange={this.props.onChange}
 					/>
 				</span>
-				{this.props.mode === "edit" && (
+				{this.props.mode === "print" && (
 					<span className="translationEditButtons">
-						<button onClick={this.handleSaveTranslation}>Save</button>
+						<button onClick={this.handleEditTranslation}>Edit</button>
 						<button onClick={this.handleDeleteTranslation}>Delete</button>
 					</span>
 				)}
