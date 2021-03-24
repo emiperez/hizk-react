@@ -19,12 +19,13 @@ export default class Exam extends React.Component {
 		this.setState({ exam: exam, corrections: null }, this.resetAnswerInputs());
 	}
 
-	handleChangeTranslation(e, questionId) {
-		this.answers.set(questionId, { id: questionId, locale: this.state.exam.answerLocale, text: e.target.value });
+	handleChangeTranslation(e, question) {
+		this.answers.set(question.id, { id: question.id, locale: this.state.exam.answerLocale, text: e.target.value });
 	}
 
 	handleGradeExam() {
 		let strAnswers = JSON.stringify(Array.from(this.answers.values()));
+		console.log("answers: " + strAnswers);
 		fetch(config.apiUrl + "/exams/answers/" + this.state.exam.id,
 			{
 				headers: { 'Content-Type': 'application/json' },
@@ -72,13 +73,9 @@ export default class Exam extends React.Component {
 						{this.state.exam.questions.map(question => (
 							<div key={question.id} className="examQuestion">
 								<Translation
-									id={question.id}
-									origin={question.text}
-									originLocale={question.locale}
-									target=""
-									targetLocale={this.state.exam.answerLocale}
+									origin={question}
 									mode="exam"
-									onChange={e => this.handleChangeTranslation(e, question.id)} />
+									onChange={e => this.handleChangeTranslation(e, question)} />
 								{this.showCorrection(question.id)}
 							</div>
 						))}

@@ -5,9 +5,9 @@ import locales from "./locales.json";
 export default function Term(props) {
 	switch (props.mode) {
 		case "label":
-			return <label>{props.value}</label>;
+			return <label>{props.value.text}</label>;
 		case "search":
-			return <input className="searchTerm" type="text" onChange={props.onChange} />;
+			return <input className="searchTerm" type="text" value={props.value.text} onChange={props.onChange} />;
 		case "guess":
 			return <input className="guessTerm" type="text" onBlur={props.onChange} />;
 	}

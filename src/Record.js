@@ -18,7 +18,7 @@ export default class Record extends React.Component {
 	render() {
 		let translations = this.state.latest.map(tr => (
 			<div key={tr.origin.id + "-" + tr.meaning.id}>
-				<Translation mode="print" origin={tr.origin.text} target={tr.meaning.text} />
+				<Translation mode="print" origin={tr.origin} meaning={tr.meaning} />
 			</div>
 			));
 		return (
