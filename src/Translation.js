@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import Term from "./Term";
+import config from "./config.json";
 
 export default class Translation extends React.Component {
 	constructor(props) {
@@ -21,7 +22,14 @@ export default class Translation extends React.Component {
 	}
 
 	handleClickDelete() {
-		alert("Delete: " + JSON.stringify(this.props.origin) + " / " + JSON.stringify(this.props.meaning));
+		const url = config.apiUrl + "/translations/" + this.props.origin.id + "/" + this.props.meaning.id;
+		fetch(url,
+			{
+				method: "DELETE"
+			})
+			.then(response => response.text())
+			.then(this.props.onDelete())
+			.catch(error => alert("Could not be deleted: " + error));
 	}
 
 	handleClickSave() {
