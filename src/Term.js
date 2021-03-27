@@ -1,5 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
+import TermSearch from "./TermSearch"
 import locales from "./locales.json";
 
 export default function Term(props) {
@@ -7,7 +8,7 @@ export default function Term(props) {
 		case "label":
 			return <label>{props.value.text}</label>;
 		case "search":
-			return <input className="searchTerm" type="text" value={props.value.text} onChange={props.onChange} />;
+			return <TermSearch className="searchTerm" type="text" value={props.value.text} onChange={props.onChange} />;
 		case "guess":
 			return <input className="guessTerm" type="text" onBlur={props.onChange} />;
 	}
