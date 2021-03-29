@@ -6,7 +6,7 @@ import locales from "./locales.json";
 export default function Term(props) {
 	switch (props.mode) {
 		case "label":
-			return <label>{props.value.text}</label>;
+			return <a className="termLink" href={"term/" + props.value.id}>{props.value.text}</a>;
 		case "search":
 			return <TermSearch className="searchTerm" type="text" value={props.value.text} onChange={props.onChange} />;
 		case "guess":
