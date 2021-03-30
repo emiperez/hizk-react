@@ -7,10 +7,10 @@ export default class TermSearch extends React.Component {
 	constructor(props) {
 		super(props);
 		this.timer = 0;
-		this.state = { result: [], text: "" };
+		this.state = {value: this.props.value};
 	}
 
-	filterColors = (terms) => {
+	processData = (terms) => {
 		let options = [];
 		for (let t of terms) {
 			options.push({
@@ -35,7 +35,7 @@ export default class TermSearch extends React.Component {
 				.then(response => response.json())
 				.then(data => {
 					const terms = data;
-					callback(this.filterColors(terms));
+					callback(this.processData(terms));
 				});
 		}, 500);
 	};
@@ -43,9 +43,10 @@ export default class TermSearch extends React.Component {
 	render() {
 		return <AsyncSelect
 			name="search"
-			defaultValue={this.state.text}
+			defaultValue={this.props.value}
 			placeholder="search Term"
 			loadOptions={this.loadOptions}
+			onChange={(inputValue) => console.log("TermSearch value: " + JSON.stringify(inputValue))}
 		/>;
 	}
 }
