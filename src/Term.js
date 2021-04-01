@@ -6,9 +6,11 @@ import locales from "./locales.json";
 export default function Term(props) {
 	switch (props.mode) {
 		case "label":
-			return <a className="termLink" href={"term/" + props.value.id}>{props.value.text}</a>;
+			return <a className="termLink" href={"/term/" + props.value.id}>{props.value.text}</a>;
+		case "edit":
+			return <TermSearch className="editTerm" value={props.value} onChange={props.onChange} />;
 		case "search":
-			return <TermSearch className="searchTerm" type="text" value={props.value.text} onChange={props.onChange} />;
+			return <TermSearch className="searchTerm" value={props.value} onChange={props.onChange} />;
 		case "guess":
 			return <input className="guessTerm" type="text" onBlur={props.onChange} />;
 	}
@@ -16,5 +18,5 @@ export default function Term(props) {
 
 Term.propTypes = {
 	locale: propTypes.oneOf(locales),
-	mode: propTypes.oneOf(["label", "search", "guess"])
+	mode: propTypes.oneOf(["label", "edit",  "search", "guess"])
 };

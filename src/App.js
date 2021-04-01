@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -8,6 +8,7 @@ import {
 import TermSearch from "./TermSearch";
 import Exam from "./Exam";
 import Record from "./Record";
+import TermEditor from "./TermEditor";
 import "./style.css";
 
 export default function App() {
@@ -24,10 +25,11 @@ export default function App() {
 						</li>
 						<li>
 							<TermSearch />
-						</li>	
+						</li>
 					</ul>
 				</nav>
 				<Switch>
+					<Route path="/term/:id" children={<TermEditor />} />
 					<Route path="/record">
 						<Record />
 					</Route>

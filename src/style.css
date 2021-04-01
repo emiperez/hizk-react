@@ -2,6 +2,10 @@ h1, p {
 	font-family: Lato;
 }
 
+.reactSelect {
+	width: 20em;
+}
+
 .translationTerm {
 	display: inline-block;
 	width: 20em;

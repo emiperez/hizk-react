@@ -1,14 +1,13 @@
 import React from "react";
 import propTypes from "prop-types";
 import Term from "./Term";
+import DeleteButton from "./DeleteButton"
 import config from "./config.json";
 
 export default class Translation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {mode: props.mode};
-		this.handleClickEdit = this.handleClickEdit.bind(this);
-		this.handleClickCancelEdit = this.handleClickCancelEdit.bind(this);
 		this.handleClickDelete = this.handleClickDelete.bind(this);
 		this.handleClickSave = this.handleClickSave.bind(this);
 	}
@@ -22,7 +21,8 @@ export default class Translation extends React.Component {
 	}
 
 	handleClickDelete() {
-		const url = config.apiUrl + "/translations/" + this.props.origin.id + "/" + this.props.meaning.id;
+		const url = config.apiUrl + "/translations/" + this.props.object.origin.id + "/" + this.props.object.meaning.id;
+		console.log("DELETE URL: " + url);
 		fetch(url,
 			{
 				method: "DELETE"
@@ -30,10 +30,12 @@ export default class Translation extends React.Component {
 			.then(response => response.text())
 			.then(this.props.onDelete())
 			.catch(error => alert("Could not be deleted: " + error));
+		console.log("onDelete.name=" + this.props.onDelete.name);
+		this.props.onDelete();
 	}
 
 	handleClickSave() {
-		alert("Save: " + JSON.stringify(this.props.origin) + " / " + JSON.stringify(this.props.meaning));
+		alert("Save: " + JSON.stringify(this.props.object.origin) + " / " + JSON.stringify(this.props.object.meaning));
 	}
 
 	render() {
@@ -57,13 +59,13 @@ export default class Translation extends React.Component {
 				<span className="translationTerm">
 					<Term
 						mode={originMode}
-						value={this.props.origin}
+						value={this.props.object.origin}
 					/>
 				</span>
 				<span className="translationTerm">
 					<Term
 						mode={meaningMode}
-						value={this.props.meaning}
+						value={this.props.object.meaning}
 						onChange={this.props.onChange}
 					/>
 				</span>
@@ -75,8 +77,7 @@ export default class Translation extends React.Component {
 				)}
 				{ this.state.mode == "print" && (
 					<span className="translationButtons">
-						<button onClick={this.handleClickEdit}>Edit</button>
-						<button onClick={this.handleClickDelete}>Delete</button>
+						<DeleteButton onClick={this.handleClickDelete} />
 					</span>
 				)}
 			</div>
