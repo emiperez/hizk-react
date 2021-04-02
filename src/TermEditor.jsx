@@ -12,8 +12,12 @@ class TermEditor extends React.Component {
 		this.state = {translations: []};
 	}
 	
+	handleSave() {
+		console.log("Term Save");
+	}
+	
 	handleDelete() {
-		window.location= "/record";
+		console.log("Term Delete");
 	}
 	
 	componentDidMount() {
@@ -27,7 +31,7 @@ class TermEditor extends React.Component {
 		return (
 			<>
 			<h1>Term editor</h1>
-			<div ><TermSearch id={this.id} /><DeleteButton  onClick={() => this.handleDelete()} /></div>
+			<div ><TermSearch id={this.id} /><button onClick={() => this.handleSave()}>Save</button><DeleteButton  onClick={() => this.handleDelete()} /></div>
 			<h2>Translations</h2>
 			<TranslationList translations={this.state.translations} />
 			</>
