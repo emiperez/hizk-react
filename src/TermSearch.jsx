@@ -36,7 +36,7 @@ export default class TermSearch extends React.Component {
 		if (term) {
 			return ({value: term.id, label: term.locale + " - " + term.text})
 		} else {
-			return ({value: -1, label: "larala"});
+			return ({value: -1, label: "Not Available"});
 		}
 	}
 
@@ -71,16 +71,10 @@ export default class TermSearch extends React.Component {
 			options={this.state.options}
 			placeholder="search Term"
 			loadOptions={this.loadOptions}
-			onChange={(inputValue) => console.log("TermSearch value: " + JSON.stringify(inputValue))}
+			onChange={(inputValue) => window.location = "/term/" + inputValue.value}
 			className="reactSelect"
 			isClearable={true}
-		/>;		
-//			return <input name="search"			
-//			value={this.props.value && this.props.value.text}
-//			placeholder="search Term"
-//			onChange={(inputValue) => console.log("TermSearch value: " + JSON.stringify(inputValue))}
-//			className="reactSelect"
-//		/>;
+		/>;
 	}
 
 }

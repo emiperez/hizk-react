@@ -1,11 +1,12 @@
 import React from "react";
+import Translation from "./Translation";
 import TranslationList from "./TranslationList";
 import config from "./config.json";
 
 export default class Record extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {latest: []};
+		this.state = {latest: [], translation: null};
 	}	
 	
 	componentDidMount() {		
@@ -17,6 +18,8 @@ export default class Record extends React.Component {
 	render() {
 		return (
 			<>
+			<h1>New Translation</h1>
+			<Translation mode="new" />
 			<h2>Latest</h2>
 			<TranslationList translations={this.state.latest} />
 			</>

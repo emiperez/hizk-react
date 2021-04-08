@@ -7,8 +7,10 @@ export default function Term(props) {
 	switch (props.mode) {
 		case "label":
 			return <a className="termLink" href={"/term/" + props.value.id}>{props.value.text}</a>;
+		case "new":
+			return <TermNew className="newTerm" value={props.value} onChange={props.onChange} />;
 		case "edit":
-			return <TermSearch className="editTerm" value={props.value} onChange={props.onChange} />;
+			return <TermEdit className="editTerm" value={props.value} onChange={props.onChange} />;
 		case "search":
 			return <TermSearch className="searchTerm" value={props.value} onChange={props.onChange} />;
 		case "guess":

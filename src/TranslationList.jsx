@@ -6,16 +6,8 @@ export default class TranslationList extends React.Component {
 	constructor(props) {
 		super(props);
 		console.log("TRANSACTION LIST:" + JSON.stringify(props.translations));
-		this.state = {loaded: false, translations: props.translations };
+		this.state = { loaded: false, translations: props.translations };
 		this.handleDeleteTranslation = this.handleDeleteTranslation.bind(this);
-	}
-
-	static getDerivedStateFromProps(props, state) {
-		console.log("derived:" + JSON.stringify(state.translations));
-		if (!state.loaded && props.translations !== state.translations) {
-			return {loaded: true, translations: props.translations};
-		}		
-		return state;
 	}
 
 	handleDeleteTranslation(e, translation) {
@@ -23,7 +15,15 @@ export default class TranslationList extends React.Component {
 		const filteredLatest = this.state.translations.filter(tr => (
 			tr.origin.id !== translation.origin.id || tr.meaning.id !== translation.meaning.id));
 		console.log("removed translation: " + JSON.stringify(translation) + "/" + JSON.stringify(filteredLatest));
-		this.setState({translations: filteredLatest }, );
+		this.setState({ translations: filteredLatest },);
+	}
+
+	componentDidUpdate(prevProps) {
+		console.log("Translation List did Update: " + JSON.stringify(this.props.translations));
+		console.log("Translation List did Update prev: " + JSON.stringify(prevProps.translations));
+		if (this.props.translations !== prevProps.translations) {
+			this.setState({translations: this.props.translations});
+		}
 	}
 
 	render() {
