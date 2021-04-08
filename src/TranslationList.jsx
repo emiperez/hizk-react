@@ -10,12 +10,9 @@ export default class TranslationList extends React.Component {
 		this.handleDeleteTranslation = this.handleDeleteTranslation.bind(this);
 	}
 
-	handleDeleteTranslation(e, translation) {
-		console.log("handleDeleteTranslation");
-		const filteredLatest = this.state.translations.filter(tr => (
-			tr.origin.id !== translation.origin.id || tr.meaning.id !== translation.meaning.id));
-		console.log("removed translation: " + JSON.stringify(translation) + "/" + JSON.stringify(filteredLatest));
-		this.setState({ translations: filteredLatest },);
+	handleDeleteTranslation() {
+		console.log("TranslationList.onDeleteTranslation");
+		this.props.onDeleteTranslation();
 	}
 
 	componentDidUpdate(prevProps) {
@@ -34,7 +31,6 @@ export default class TranslationList extends React.Component {
 				object={tr}
 				onDelete={e => this.handleDeleteTranslation(e, tr)} />
 		));
-
 		return (<div>{translations}</div>);
 	}
 }

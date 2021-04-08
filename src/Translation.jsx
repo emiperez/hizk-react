@@ -49,10 +49,8 @@ export default class Translation extends React.Component {
 				method: "DELETE"
 			})
 			.then(response => response.text())
-			.then(this.props.onDelete())
+			.then(() => this.props.onDelete())
 			.catch(error => alert("Could not be deleted: " + error));
-		console.log("onDelete.name=" + this.props.onDelete.name);
-		this.props.onDelete();
 	}
 
 	render() {

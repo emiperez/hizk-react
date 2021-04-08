@@ -9,10 +9,8 @@ export default class Record extends React.Component {
 		this.state = {latest: [], translation: null};
 	}	
 	
-	componentDidMount() {		
-		fetch(config.apiUrl + "/translations")
-			.then(response => response.json())
-			.then(data => this.setState({ latest: data }));
+	componentDidMount() {
+		this.loadTranslations();	
 	}
 	
 	render() {
@@ -21,8 +19,17 @@ export default class Record extends React.Component {
 			<h1>New Translation</h1>
 			<Translation mode="new" />
 			<h2>Latest</h2>
-			<TranslationList translations={this.state.latest} />
+			<TranslationList 
+				translations={this.state.latest} 
+				onDeleteTranslation={() => this.loadTranslations()}/>
 			</>
 		);
+	}
+	
+	loadTranslations() {
+		console.log("Record.loadTranslations");
+		fetch(config.apiUrl + "/translations")
+			.then(response => response.json())
+			.then(data => this.setState({ latest: data }));		
 	}
 }

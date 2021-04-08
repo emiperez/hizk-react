@@ -54,7 +54,9 @@ class TermEditor extends React.Component {
 				<DeleteButton  onClick={() => this.handleDelete()} />
 			</div>
 			<h2>Translations</h2>
-			<TranslationList translations={this.state.translations} />
+			<TranslationList 
+				translations={this.state.translations} 
+				onDeleteTranslation={() => this.loadTranslations()} />
 			</>
 		);
 	}
