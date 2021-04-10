@@ -2,29 +2,30 @@ import React from "react";
 import AsyncCreatableSelect from "react-select/async-creatable";
 import config from "./config.json";
 
-export default class TermNew extends React.Component {	
+export default class TermNew extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.timer = 0;
 		this.state = { option: null, options: [] };
+		this.handleOnChange = this.handleOnChange.bind(this);
 	}
 
-	term2option = (term) => {
-		if (term) {
-			return ({value: term.id, label: term.locale + " - " + term.text})
-		} else {
-			return ({value: -1, label: "larala"});
+	handleOnChange(newValue) {
+		if (newValue) {
+			let term = {id: null, locale: this.props.locale, text: newValue.label}
+			if (!newValue.__isNew__) {
+				term.id = newValue.value;
+			} 
+			console.log("TermNew onChange: " + JSON.stringify(newValue));
+			this.props.onChange(term);
+			console.log("TermNew onChange2: " + JSON.stringify(newValue));
 		}
-	}
-
-	processData = (terms) => {
-		return terms.map(t => this.term2option(t));
 	}
 
 	loadOptions = (inputValue, callback) => {
 		clearTimeout(this.timer);
-		let url = config.apiUrl + "/terms/search/" + inputValue + "/" + this.props.value.locale;
+		let url = config.apiUrl + "/terms/search/" + this.props.locale + "/?text=" + inputValue;
 		this.timer = setTimeout(() => {
 			fetch(url)
 				.then(response => response.json())
@@ -34,20 +35,26 @@ export default class TermNew extends React.Component {
 				});
 		}, 500);
 	};
-	
-	value = () => {
-		return (this.state.value && {value: this.state.value.id, label: this.state.value.text});
-	}
-	
-	render() { 
-			return (<AsyncCreatableSelect
-			value={this.state.option}
-			options={this.state.options}
-			placeholder="search Term"
+
+	render() {
+		return (<AsyncCreatableSelect
+			placeholder="new Term"
 			loadOptions={this.loadOptions}
-			onChange={(inputValue) => console.log("TermNew value: " + JSON.stringify(inputValue))}
 			className="reactSelect"
-			isClearable={true}/>);
+			onChange={(newValue) => this.handleOnChange(newValue)}
+			isClearable={true} />);
 	};
+
+	term2option = (term) => {
+		if (term) {
+			return ({ value: term.id, label: term.text })
+		} else {
+			return ({ value: -1, label: "" });
+		}
+	}
+
+	processData = (terms) => {
+		return terms.map(t => this.term2option(t));
+	}
 
 }

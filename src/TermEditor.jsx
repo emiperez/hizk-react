@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router";
-import DeleteButton from "./DeleteButton";
 import TranslationList from "./TranslationList";
 import config from "./config.json";
 
@@ -13,7 +12,7 @@ class TermEditor extends React.Component {
 	
 	handleChangeTerm(e) {
 		this.setState((state) => {
-			let term = this.state.term;
+			let term = state.term;
 			term.text = e.target.value;
 			return ({term: term});
 		});
@@ -29,10 +28,6 @@ class TermEditor extends React.Component {
 			.then(response => response.json())
 			.then(data => this.setState({ term: data }));
 		this.loadTranslations();
-	}
-	
-	handleDelete() {
-		console.log("Term Delete");
 	}
 	
 	componentDidMount() {
@@ -51,7 +46,6 @@ class TermEditor extends React.Component {
 				<button 
 					disabled={this.state.term.id < 0 || !this.state.term.locale || !this.state.term.text} 
 					onClick={() => this.handleSave()}>Save</button>
-				<DeleteButton  onClick={() => this.handleDelete()} />
 			</div>
 			<h2>Translations</h2>
 			<TranslationList 

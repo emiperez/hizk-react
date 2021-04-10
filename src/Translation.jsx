@@ -15,28 +15,6 @@ export default class Translation extends React.Component {
 		this.handleClickSave = this.handleClickSave.bind(this);
 	}
 
-	handleChangeOrigin(e) {
-		this.setState(prevState => ({
-			origin: {
-				...prevState.origin,
-				text: {
-					text: e.target.value
-				}
-			}
-		}))
-	}
-
-	handleChangeMeaning(e) {
-		this.setState(prevState => ({
-			meaning: {
-				...prevState.meaning,
-				text: {
-					text: e.target.value
-				}
-			}
-		}))
-	}
-
 	handleClickSave() {
 		alert("Save: " + JSON.stringify(this.state.object.origin) + " / " + JSON.stringify(this.state.object.meaning));
 	}
@@ -54,23 +32,10 @@ export default class Translation extends React.Component {
 	}
 
 	render() {
-		let originMode, meaningMode;
-		switch (this.state.mode) {
-			case "new":
-				return (
-					<div>
-						<TermNew onChange={() => this.handleChangeOrigin} value={this.state.object.origin} />
-						<TermNew onChange={() => this.handleChangeMeaning} value={this.state.object.meaning} />
-						<span className="translationEditButtons">
-							<button onClick={this.handleClickSave}>Save</button>
-						</span>
-					</div>);
-			case "print":
-				originMode = meaningMode = "label";
-				break;
-			case "exam":
-				originMode = "label";
-				meaningMode = "guess";
+		let originMode = "label";
+		let meaningMode = originMode;
+		if (this.state.mode === "exam") {
+			meaningMode = "guess";
 		}
 		return (
 			<div className="translation">
@@ -87,12 +52,6 @@ export default class Translation extends React.Component {
 						onChange={this.props.onChange}
 					/>
 				</span>
-				{["edit", "new"].includes(this.state.mode) && (
-					<span className="translationEditButtons">
-						<button onClick={this.handleClickCancelEdit}>Cancel</button>
-						<button onClick={this.handleClickSave}>Save</button>
-					</span>
-				)}
 				{ this.state.mode == "print" && (
 					<span className="translationButtons">
 						<DeleteButton onClick={this.handleClickDelete} />
@@ -104,5 +63,5 @@ export default class Translation extends React.Component {
 }
 
 Translation.propTypes = {
-	mode: propTypes.oneOf(["new", "print", "exam"])
+	mode: propTypes.oneOf(["print", "exam"])
 };

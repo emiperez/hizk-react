@@ -46,7 +46,7 @@ export default class TermSearch extends React.Component {
 
 	loadOptions = (inputValue, callback) => {
 		clearTimeout(this.timer);
-		let url = config.apiUrl + "/terms/search/" + inputValue;
+		let url = config.apiUrl + "/terms/search/?text=" + inputValue;
 		if (typeof x !== "undefined") {
 			url += "/" + this.props.locale;
 		}
