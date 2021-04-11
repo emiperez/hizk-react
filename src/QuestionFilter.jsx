@@ -29,15 +29,15 @@ export default class QuestionFilter extends React.Component {
 				'Content-Type': 'application/json'
 			}
 		})
-			.then(function(response) {
-				return response.json();
-			})
-			.then(function(data) {
-				parentFunction(data);
-			})
-			.catch(function(error) {
-				console.error(error);
-			})
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+			parentFunction(data);
+		})
+		.catch(function(error) {
+			console.error(error);
+		})
 	}
 
 	componentDidMount() {

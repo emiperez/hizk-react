@@ -73,7 +73,7 @@ export default class Exam extends React.Component {
 						{this.state.exam.questions.map(question => (
 							<div key={question.id} className="examQuestion">
 								<Translation
-									origin={question}
+									object={{origin: question, meaning: {id: null, locale: this.state.exam.answerLocale, text: ""}}}
 									mode="exam"
 									onChange={e => this.handleChangeTranslation(e, question)} />
 								{this.showCorrection(question.id)}
