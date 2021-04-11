@@ -1,22 +1,20 @@
 import React from "react";
 import propTypes from "prop-types";
 import Term from "./Term";
-import TermNew from "./TermNew";
 import DeleteButton from "./DeleteButton"
 import config from "./config.json";
+import LevelSelect from "./LevelSelect";
 
 export default class Translation extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { mode: props.mode, 
-						object: { origin: { id: null, locale: "de", text: null }, 
-									meaning: { id: null, locale: "es", text: null } } };
+		this.state = { mode: props.mode, object: this.props.object };
 		this.handleClickDelete = this.handleClickDelete.bind(this);
-		this.handleClickSave = this.handleClickSave.bind(this);
+		this.handleUpdateLevel = this.handleUpdateLevel.bind(this);
 	}
 
-	handleClickSave() {
-		alert("Save: " + JSON.stringify(this.state.object.origin) + " / " + JSON.stringify(this.state.object.meaning));
+	handleUpdateLevel(e) {
+		this.setState( (prevState) => ({ object: { ...prevState.object, level: e.target.value} }), () => this.sendUpdate());
 	}
 
 	handleClickDelete() {
@@ -54,11 +52,24 @@ export default class Translation extends React.Component {
 				</span>
 				{ this.state.mode == "print" && (
 					<span className="translationButtons">
+						<LevelSelect 
+							value={this.state.object.level} 
+							onChange={(e) => this.handleUpdateLevel(e)} />
 						<DeleteButton onClick={this.handleClickDelete} />
 					</span>
 				)}
 			</div>
 		);
+	}
+	
+	sendUpdate() {
+		fetch(config.apiUrl + "/translations/",
+			{
+				headers: { 'Content-Type': 'application/json' },
+				method: "PUT", body: JSON.stringify(this.state.object)
+			})
+			.then(response => response.json())
+			.then(data => this.setState({ object: data }));		
 	}
 }
 
