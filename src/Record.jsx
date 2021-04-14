@@ -14,19 +14,16 @@ export default class Record extends React.Component {
 	}
 
 	handleChangeOrigin(newValue) {
-		console.log("Record.handleChangeOrigin: " + JSON.stringify(newValue));
 		this.setState({ origin: newValue });
 	}
 
 	handleChangeMeaning(newValue) {
-		console.log("Record.handleChangeMeaning: " + JSON.stringify(newValue));
 		this.setState({ meaning: newValue });
 	}
 
 	handleClickSave() {
 		const translation = {origin: this.state.origin, meaning: this.state.meaning, level: this.state.level};
 		const strTranslation = JSON.stringify(translation);
-		console.log("Record.handleSave: " + strTranslation);
 		fetch(config.apiUrl + "/translations/",
 			{
 				headers: { 'Content-Type': 'application/json' },
@@ -34,6 +31,7 @@ export default class Record extends React.Component {
 			})
 			.then(response => response.json())
 			.then(data => this.setState({ latest: [data, ...this.state.latest] }));
+		this.levelSelect.select.focus();
 	}
 
 	loadTranslations() {
@@ -45,6 +43,7 @@ export default class Record extends React.Component {
 
 	componentDidMount() {
 		this.loadTranslations();
+		this.levelSelect.select.focus();
 	}
 
 	render() {
@@ -54,6 +53,8 @@ export default class Record extends React.Component {
 				<div>
 					<label>Level</label>
 					<LevelSelect
+						ref={(ls) => this.levelSelect = ls}
+						autoFocus
 						value={this.state.level}
 						onChange={e => this.setState({ level: e.target.value })} />
 					<label>{config.originLocale}</label> <TermNew locale={config.originLocale} onChange={this.handleChangeOrigin} />

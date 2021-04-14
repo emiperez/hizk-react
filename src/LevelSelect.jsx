@@ -21,6 +21,7 @@ export default class LevelSelect extends React.Component {
 		));
 		return (
 				<select 
+					ref={(s) => this.select = s}
 					value={this.props.value || this.props.defaultValue || "A1"}
 					onChange={this.props.onChange}>
 					{levelOptions}
