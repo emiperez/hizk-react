@@ -1,4 +1,7 @@
 import React from "react";
+import {
+	Link
+} from "react-router-dom";
 import propTypes from "prop-types";
 import TermSearch from "./TermSearch"
 import locales from "./locales.json";
@@ -6,7 +9,7 @@ import locales from "./locales.json";
 export default function Term(props) {
 	switch (props.mode) {
 		case "label":
-			return <a className="termLink" href={"/term/" + props.value.id}>{props.value.text}</a>;
+			return <Link className="termLink" to={"/term/" + props.value.id}>{props.value.text}</Link>;
 		case "new":
 			return <TermNew className="newTerm" value={props.value} onChange={props.onChange} />;
 		case "edit":
