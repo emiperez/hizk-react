@@ -1,5 +1,15 @@
+nav {
+	display: inline;
+}
+
+nav > ul li {
+	display: inline;
+	margin: 0.5em;
+	padding: 0.2em;
+}
+
 h1, p {
-	font-family: Lato;
+	font-family: Arial;
 }
 
 .reactSelect {
@@ -14,12 +24,12 @@ h1, p {
 
 .translationList > .translation {
 	border-bottom: 1px solid;
-	padding: 0.5em;
+	padding: 0.2em;
 }
 
 .translationTerm {
 	display: inline-block;
-	width: 18.5em;
+	width: 19em;
 }
 
 .translationButtons > * {
@@ -27,7 +37,7 @@ h1, p {
 }
 
 .translationTerm input {
-	width: 18em;
+	width: 18.5em;
 }
 
 .rangeWithLabel span {
@@ -38,8 +48,8 @@ h1, p {
 
 .filterField {
 	display: inline-block;
-	padding: 0.3em;
-	margin: 0.2em;
+	padding: 0.2em;
+	margin: 0.1em;
 	border: thin solid gray;
 }
 
@@ -57,7 +67,7 @@ h1, p {
 
 #questionForm > .examQuestion {
 	border-bottom: 1px solid;
-	padding: 0.5em;
+	padding: 0.2em;
 }
 
 #questionForm > .examQuestion > * {
