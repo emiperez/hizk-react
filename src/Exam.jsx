@@ -44,12 +44,12 @@ export default class Exam extends React.Component {
 
 	showCorrection(id) {
 		let className = "rightAnswer";
-		if (this.state.corrections && this.state.corrections.get(id)) {
-			console.log("showCorrection: " + this.state.corrections.get(id).text);
-			if (this.state.corrections.get(id).text !== this.answers.get(id).text) {
+		if (this.state.corrections ) {
+			const correction = this.state.corrections.get(id);
+			if (correction && correction.text !== this.answers.get(id).text) {
 				className = "wrongAnswer";
 			}
-			return <span className={className}>{this.state.corrections.get(id).text}</span>;
+			return <span className={className}>{correction.text}</span>;
 		}
 		return null;
 	}
